@@ -25,8 +25,6 @@ const UserSchema = new mongoose.Schema({
         type: String, 
         required:[true, 'Please enter password'],
         minlength: 6,
-        maxlength: 20,
-        trim: true,
         select: false,
         },
     lastName: {
@@ -55,4 +53,8 @@ UserSchema.methods.createJWT = function() {
                     {expiresIn: process.env.JWT_LIFETIME}
 )}
 
+UserSchema.methods.comparePassword = async function(candidatePassword) {
+    const isMatch = await bcrypt.compare(candidatePassword, this.password)
+    return isMatch
+}
 export default mongoose.model('User', UserSchema)

@@ -14,7 +14,7 @@ const reducer = (state, action) => {
     }
     
     if(action.type === CLEAR_ALERT) {
-        return {...alert, 
+        return {...state, 
                 showAlert:false, 
                 alertType:'', 
                 alertText:''
@@ -64,7 +64,7 @@ const reducer = (state, action) => {
                 isLoading: false, 
                 showAlert: true,
                 alertType: 'danger',
-                alertText: action.payload.alertText,
+                alertText: action.payload.msg,
             }
     }
 
